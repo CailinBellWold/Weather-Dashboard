@@ -1,12 +1,14 @@
 # 06 Weather Dashboard
 
 ## Description
+
 A **weather dashboard** that will run in the browser and feature dynamically updated HTML and CSS using the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) and using `localStorage` to store any persistant data.
 
 ### Motivation
 
 ### Learning Targets
-This exercise encompassed building a JavaScript page using Bootstrap, increasing familiarity with setTimeout() and setInterval() functions, traversing the DOM to update elements as the quiz progressed, and passing items into and out of local storage.
+
+This exercise encompasses utilizing an API alongside Javascript to dynamically update HTML and CSS, storing and fetching data from local storage,...
 
 ## Core Objectives Met
 

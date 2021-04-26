@@ -12,8 +12,8 @@ This exercise encompasses utilizing an API alongside Javascript to dynamically u
 
 ## Core Objectives Met
 
-1. IN PROGRESS: When the user visits the page, they should be presented with a weather dashboard with form inputs.
-2. IN PROGRESS: When a city is searched, they are presented with current and future conditions for that city and the city is added to the search history.
+1. IN PROGRESS: When the page is visited, the user is presented with a weather dashboard that includes form inputs.
+2. IN PROGRESS: When a city is searched, the user is presented with current and future conditions for that city and the city is added to the search history.
 3. IN PROGRESS: When current weather conditions for a city are viewed, the user is presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index.
 4. IN PROGRESS: When the UV index is viewed, the user is presented with a color that indicates whether the conditions are favorable, moderate, or severe.
 5. IN PROGRESS: When future weather conditions for a city are viewed, the user is presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity.

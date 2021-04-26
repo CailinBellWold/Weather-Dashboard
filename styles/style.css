@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+}
+
+:root {
+  --c--black: #000000;
+  --c-dblue: #023047;
+  --c-blue: #219ebc;
+  --c-lblue: #8ecae6;
+  --c-orange: #fb8500;
+  --c-yellow: #ffb703;
+  --c-lneutral: #f0eada;
+  --c-white: #ffffff;
+}

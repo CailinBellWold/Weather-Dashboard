@@ -10,6 +10,34 @@
   --c-lblue: #8ecae6;
   --c-orange: #fb8500;
   --c-yellow: #ffb703;
-  --c-lneutral: #f0eada;
+  --c-lneutral: #fffaf2;
   --c-white: #ffffff;
+}
+
+body {
+  background-color: var(--c-lneutral);
+  color: var(--c-dblue);
+}
+
+.custom-header {
+  background-image: linear-gradient(to right, var(--c-blue), var(--c-dblue));
+  padding: 2em;
+}
+
+/* .custom-container {
+  border: solid var(--c-orange) 2px;
+} */
+
+.custom-card-header {
+  background-color: var(--c-blue) !important;
+  color: var(--c-dblue) !important;
+}
+
+.custom-card-body {
+  background-image: linear-gradient(var(--c-blue), var(--c-lblue));
+  line-height: 1.5rem !important; /*TO DO: Get this to work*/
+}
+
+.custom-footer {
+  background-image: linear-gradient(to right, var(--c-blue), var(--c-dblue));
 }

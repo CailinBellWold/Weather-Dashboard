@@ -7,39 +7,154 @@
     <meta name="keywords" content="Code-Quiz, JavaScript">
     <meta name="author" content="Cailin Bell Wold">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Quiz</title>
+    <title>Weather Dashboard</title>
     <!--Stylesheets-->
     <link rel="stylesheet" href="styles/jass.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@200;300&display=swap" rel="stylesheet">
-    <!-- Icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <header>
+    <header class="custom-header text-white text-center">
+        <h1>Weather Dashboard</h1>
     </header>
 
-    <main>
+    <main class="container-fluid custom-main">
+        <div class="my-2 mx-5">
+        <section class="row">
+            <div class="col-12 col-md-2">
+                <h2>Search for a city:</h2>
+                <div class="input-group w-100">
+                    <div class="form-outline w-100">
+                        <input id="search-input" type="search" id="form1" class="form-control" />
+                        <label class="form-label" for="form1">City Name</label>
+                    </div>
+                    <button id="search-button" type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <!--Current Day's Forecast-->
+            <div class="col-12 col-md-10">
+                <div class="card">
+                    <h3 class="card-header custom-card-header">City, Date, Icon</h3>
+                    <div class="card-body custom-card-body">
+                        <ul class="card-text list-unstyled h5">
+                            <li>Temp:<span></span></li>
+                            <li>Wind:<span></span></li>
+                            <li>Humidity:<span></span></li>
+                            <li>UV Index:<span></span></li>
+                        </ul>
+                    </div>
+                </div>
 
-<footer>
-    <section class="container p-2">
-        <!-- Social Media -->
-            <a class="btn fa fa-linkedin fa-lg text-white" href="https://www.linkedin.com/in/cailinbellwold/" target="_blank" rel="noreferrer noopener" alt="LinkedIn"></a>
-            <a class="btn fa fa-github fa-lg text-white" href="https://github.com/CailinBellWold" target="_blank" rel="noreferrer noopener" alt="GitHub"></a>
-            <a class="btn fa fa-envelope fa-lg text-white" href="mailto:cmbellwold@gmail.com?subject=Contact from Portfolio Site" alt="E-mail cmbellwold@gmail.com"></a> 
-        <section class="mt-2">
-            <p>Made for YOU! ©2021 Cailin M. Bell Wold</p>
+                <!--5-Day Forecast-->
+                <div class="custom-container">
+                    <div class="col-12 col-md-10">
+                    <h3 class="p-0">5-Day Forecast:</h3>
+                </div>
+                <section class="row justify-content-between">
+
+                    <!--Day 1-->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <div class="card">
+                            <h3 class="card-header custom-card-header">Day 1</h3>
+                            <div class="card-body custom-card-body">
+                                <ul class="card-text list-unstyled h5">
+                                    <li>Weather Icon</li>
+                                    <li>Temp:<span></span></li>
+                                    <li>Wind:<span></span></li>
+                                    <li>Humidity:<span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Day 2-->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <div class="card">
+                            <h3 class="card-header custom-card-header">Day 2</h3>
+                            <div class="card-body custom-card-body">
+                                <ul class="card-text list-unstyled h5">
+                                    <li>Weather Icon</li>
+                                    <li>Temp:<span></span></li>
+                                    <li>Wind:<span></span></li>
+                                    <li>Humidity:<span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Day 3-->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <div class="card">
+                            <h3 class="card-header custom-card-header">Day 3</h3>
+                            <div class="card-body custom-card-body">
+                                <ul class="card-text list-unstyled h5">
+                                    <li>Weather Icon</li>
+                                    <li>Temp:<span></span></li>
+                                    <li>Wind:<span></span></li>
+                                    <li>Humidity:<span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Day 4-->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <div class="card">
+                            <h3 class="card-header custom-card-header">Day 4</h3>
+                            <div class="card-body custom-card-body">
+                                <ul class="card-text list-unstyled h5">
+                                    <li>Weather Icon</li>
+                                    <li>Temp:<span></span></li>
+                                    <li>Wind:<span></span></li>
+                                    <li>Humidity:<span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Day 5-->
+                    <div class="col-12 col-sm-6 col-lg-2">
+                        <div class="card">
+                            <h3 class="card-header custom-card-header">Day 5</h3>
+                            <div class="card-body custom-card-body">
+                                <ul class="card-text list-unstyled h5">
+                                    <li>Weather Icon</li>
+                                    <li>Temp:<span></span></li>
+                                    <li>Wind:<span></span></li>
+                                    <li>Humidity:<span></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                
+                </section>
+            </div>
+            </div>
+
         </section>
-    </section>
-</footer>
+    </div>
+    </main>
+
+    <footer class="custom-footer text-center text-white fixed-bottom expand-lg" id="footer">
+        <section class="container p-2">
+            <!-- Social Media -->
+                <a class="btn fa fa-linkedin fa-lg text-white" href="https://www.linkedin.com/in/cailinbellwold/" target="_blank" rel="noreferrer noopener" alt="LinkedIn"></a>
+                <a class="btn fa fa-github fa-lg text-white" href="https://github.com/CailinBellWold" target="_blank" rel="noreferrer noopener" alt="GitHub"></a>
+                <a class="btn fa fa-envelope fa-lg text-white" href="mailto:cmbellwold@gmail.com?subject=Contact from Portfolio Site" alt="E-mail cmbellwold@gmail.com"></a> 
+            <section class="mt-2">
+                <p>Made for YOU! ©2021 Cailin M. Bell Wold</p>
+            </section>
+        </section>
+    </footer>
 
 <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

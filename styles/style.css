@@ -28,6 +28,14 @@ body {
   border: solid var(--c-orange) 2px;
 } */
 
+.custom-btn-search {
+  background-color: var(--c-orange);
+}
+
+.custom-btn {
+  background-color: var(--c-dblue);
+}
+
 .custom-card-header {
   background-color: var(--c-blue) !important;
   color: var(--c-dblue) !important;

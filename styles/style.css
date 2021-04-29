@@ -30,6 +30,14 @@ body {
 
 .custom-btn-search {
   background-color: var(--c-orange);
+  color: var(--c-dblue);
+  font-weight: bold;
+}
+
+.custom-btn-search:hover {
+  background-color: var(--c-yellow);
+  color: var(--c-dblue);
+  font-weight: bold;
 }
 
 .custom-btn {

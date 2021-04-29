@@ -4,6 +4,7 @@ let citySearchInput;
 let apiKey = 'a46fae6c97cce84840e8dfd333cdaca5';
 let city;
 let latLonApiUrl;
+let userCityConcat = [];
 
 // Button
 let searchButton = document.getElementById('search-button');
@@ -15,6 +16,7 @@ let searchButtonHandler = function (event) {
 
   if (citySearchInput) {
     getLatLon(citySearchInput);
+    concatCity(citySearchInput);
     setHistory(citySearchInput);
   } else {
     alert('Please enter a City');
@@ -23,13 +25,19 @@ let searchButtonHandler = function (event) {
 
 searchButton.addEventListener('click', searchButtonHandler);
 
+function concatCity(citySearchInput) {
+userCityConcat.unshift(citySearchInput);
+console.log(userCityConcat);
+};
+
 function setHistory() {
-  for <i = 0; i < 8; i++> {
-  localStorage.setItem(city-[], citySearchInput);
+  for (i = 0; i < userCityConcat.length; i++) {
+  localStorage.setItem(('city-' + [i]), citySearchInput); //TO DO: Run this backward, so that newest city shows up as city-0 and so on. Presently, assigning city to all slots.
   }
 };
 
 function renderHistory() {
+    $("#city-0").val(localStorage.getItem('city-0'));
     $("#city-1").val(localStorage.getItem('city-1'));
     $("#city-2").val(localStorage.getItem('city-2'));
     $("#city-3").val(localStorage.getItem('city-3'));
@@ -38,6 +46,7 @@ function renderHistory() {
     $("#city-6").val(localStorage.getItem('city-6'));
     $("#city-7").val(localStorage.getItem('city-7'));
     $("#city-8").val(localStorage.getItem('city-8'));
+    $("#city-9").val(localStorage.getItem('city-9'));
 };
 
 
@@ -54,8 +63,8 @@ function renderHistory() {
 
 //TO DO: Update with State/Country once I get this working.
   function getLatLon (citySearchInput) {
-    var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + "," + state + "," + country + '&limit={limit}&appid=' + apiKey;
-  
+    var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey;
+    // var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + "," + state + "," + country + '&limit={limit}&appid=' + apiKey;
     fetch(latLonApiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {

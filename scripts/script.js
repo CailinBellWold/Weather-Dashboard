@@ -6,9 +6,14 @@ let citySearchInput;
 let citySearchHistory = [];
 let apiKey = 'a46fae6c97cce84840e8dfd333cdaca5';
 let latLonApiUrl;
+let todayCardHeader = document.querySelector('#todayCardHeader');
 
 // Button
 let searchButton = document.getElementById('search-button');
+
+// Date
+let today = new Date();
+let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
 
 let searchButtonHandler = function (event) {
   event.preventDefault();
@@ -36,55 +41,44 @@ function renderHistory() {
   console.log(searchHistoryParse); //WORKS
 
   for (i = 0; i < searchHistoryParse.length; i++) {
-    console.log(searchHistoryParse.length); //Works
-    console.log(searchHistoryParse[0]); //Works
-    console.log(searchHistoryParse[1]); //Works
-
-    $('#city-0').innerText = "Testing";
-    $('#city-0').value = "Testing";
-    $('#city-1').innerText = searchHistoryParse[1];
-    $('#city-2').innerText = (searchHistoryParse[2]);
-    $('#city-3').innerText = (searchHistoryParse[3]);
-    $('#city-4').innerText = (searchHistoryParse[4]);
-    $('#city-5').innerText = (searchHistoryParse[5]);
-    $('#city-6').innerText = (searchHistoryParse[6]);
-    $('#city-7').innerText = (searchHistoryParse[7]);
-    $('#city-8').innerText = (searchHistoryParse[8]);
-    $('#city-9').innerText = (searchHistoryParse[9]);
+    $('#city-0').text(searchHistoryParse[0]); //Works
+    $('#city-1').text(searchHistoryParse[1]);
+    $('#city-2').text(searchHistoryParse[2]);
+    $('#city-3').text(searchHistoryParse[3]);
+    $('#city-4').text(searchHistoryParse[4]);
+    $('#city-5').text(searchHistoryParse[5]);
+    $('#city-6').text(searchHistoryParse[6]);
+    $('#city-7').text(searchHistoryParse[7]);
+    $('#city-8').text(searchHistoryParse[8]);
+    $('#city-9').text(searchHistoryParse[9]);
   }
 };
 
-// fetch(apiURL, {
-//   // The browser fetches the resource from the remote server without first looking in the cache.
-//   // The browser will then update the cache with the downloaded resource.
-// })
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data);
-//   });
+renderHistory();
 
 //TO DO: Update with State/Country once I get this working.
+
   function getLatLon (citySearchInput) {
-    var latLonApiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey;
+    // console.log("getLatLon triggered");
     // var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + "," + state + "," + country + '&limit={limit}&appid=' + apiKey;
+    var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey;
+
     fetch(latLonApiUrl).then(function (response) {
+      // console.log(response);
       if (response.ok) {
         response.json().then(function (data) {
-          lat = data.lat;
-          lon = data.lon;
-          console.log(lat);
-          console.log(lon);
-        });
+          for (var i = 0; i < data.length; i++) {
+            lat = data[i].lat;
+            // console.log(lat);
+            lon = data[i].lon;
+            // console.log(lon);
+          }
+        }) .then(getWeatherData);
       } else {
         alert('Error: ' + response.statusText);
       }
     });
   };
-
-// Will need this to covert city to a lat/lon
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key} 
 
 function getWeatherData (citySearchInput) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&appid=' + apiKey;
@@ -92,7 +86,13 @@ function getWeatherData (citySearchInput) {
     fetch(apiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayWeather(data.XXXXX, citySearchInput);
+          console.log(data);
+          for (var i = 0; i < data.length; i++) {
+            let icon = data[i].current.weather[0].icon;
+            console.log(icon);
+          }      
+          todayCardHeader.innerHTML = (citySearchInput + '(' + date + ')');
+          // displayWeather(data.XXXXX, citySearchInput);
         });
       } else {
         alert('Error: ' + response.statusText);

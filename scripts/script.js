@@ -126,11 +126,9 @@ renderHistory();
 
   function getLatLon (citySearchInput) {
     // console.log("getLatLon triggered");
-    // var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey; //This is returning in GitHub, as it isn't https
     var latLonApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearchInput + '&appid=' + apiKey;
 
     fetch(latLonApiUrl).then(function (response) {
-      // console.log(response);
       if (response.ok) {
         response.json().then(function (data) {
           console.log(data);

@@ -93,7 +93,6 @@ searchButton.addEventListener('click', searchButtonHandler);
 function createSearchHistory(citySearchInput) {
   citySearchHistory.unshift(citySearchInput);
   localStorage.setItem('searchHistory', JSON.stringify(citySearchHistory));
-  console.log(citySearchHistory);
   renderHistory();
 };
 
@@ -101,7 +100,6 @@ function createSearchHistory(citySearchInput) {
 function renderHistory() {
   let retrievedHistory = localStorage.getItem('searchHistory');
   let searchHistoryParse = JSON.parse(retrievedHistory);
-  // console.log(searchHistoryParse);
 
   // Creates Button
   citySearchHistoryBtnEl = document.createElement("button");
@@ -125,19 +123,13 @@ renderHistory();
 //TO DO: Update with State/Country once I get this working.
 
   function getLatLon (citySearchInput) {
-    // console.log("getLatLon triggered");
     var latLonApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearchInput + '&appid=' + apiKey;
 
     fetch(latLonApiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
-          // for (var i = 0; i < data.length; i++) {
             lat = data.coord.lat;
-            console.log(lat);
             lon = data.coord.lon;
-            console.log(lon);
-          // }
         }) .then(getWeatherData);
       } else {
         alert('Error: ' + response.statusText);
@@ -156,7 +148,7 @@ function getWeatherData (citySearchInput) {
 
           // Current Weather Icon
           weatherTodayIcon = data.current.weather[0].icon;
-          weatherTodayIconSource = ('http://openweathermap.org/img/wn/' + weatherTodayIcon + '@2x.png')
+          weatherTodayIconSource = ('https://openweathermap.org/img/wn/' + weatherTodayIcon + '@2x.png')
           weatherTodayDescription = data.current.weather[0].description;
           todayIconEl.src = weatherTodayIconSource;
           todayIconEl.alt = weatherTodayDescription;
@@ -194,7 +186,7 @@ function getWeatherData (citySearchInput) {
           day1CardHeaderEl.textContent = (date + 1); //Doesn't Work
           // Day 1 Icon
           day1Icon = data.daily[0].weather[0].icon;
-          day1IconSource = ('http://openweathermap.org/img/wn/' + day1Icon + '@2x.png')
+          day1IconSource = ('https://openweathermap.org/img/wn/' + day1Icon + '@2x.png')
           day1IconDescription = data.daily[0].weather[0].description;
           day1IconEl.src =  day1IconSource;
           day1IconEl.alt = day1IconDescription;
@@ -228,7 +220,7 @@ function getWeatherData (citySearchInput) {
           day3CardHeaderEl.textContent = (date + 3); //Doesn't Work
           // Day 3 Icon
           day3Icon = data.daily[2].weather[0].icon;
-          day3IconSource = ('http://openweathermap.org/img/wn/' + day3Icon + '@2x.png')
+          day3IconSource = ('https://openweathermap.org/img/wn/' + day3Icon + '@2x.png')
           day3IconDescription = data.daily[2].weather[0].description;
           day3IconEl.src =  day3IconSource;
           day3IconEl.alt = day3IconDescription;
@@ -245,7 +237,7 @@ function getWeatherData (citySearchInput) {
           day4CardHeaderEl.textContent = (date + 4); //Doesn't Work
           // Day 4 Icon
           day4Icon = data.daily[3].weather[0].icon;
-          day4IconSource = ('http://openweathermap.org/img/wn/' + day4Icon + '@2x.png')
+          day4IconSource = ('https://openweathermap.org/img/wn/' + day4Icon + '@2x.png')
           day4IconDescription = data.daily[3].weather[0].description;
           day4IconEl.src =  day4IconSource;
           day4IconEl.alt = day4IconDescription;
@@ -262,7 +254,7 @@ function getWeatherData (citySearchInput) {
           day5CardHeaderEl.textContent = (date + 5); //Doesn't Work
           // Day 5 Icon
           day5Icon = data.daily[4].weather[0].icon;
-          day5IconSource = ('http://openweathermap.org/img/wn/' + day5Icon + '@2x.png')
+          day5IconSource = ('https://openweathermap.org/img/wn/' + day5Icon + '@2x.png')
           day5IconDescription = data.daily[4].weather[0].description;
           day5IconEl.src =  day5IconSource;
           day5IconEl.alt = day5IconDescription;

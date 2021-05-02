@@ -112,11 +112,12 @@ function renderHistory() {
   citySearchHistoryBtnContainerEl.appendChild(citySearchHistoryBtnEl);
 
 // Adds Event Handler to Button
-  citySearchHistoryBtnEl.addEventListener ("click", function() {
-  citySearchInput = $(this).innerHTML;
-  console.log(citySearchInput); //Not Working
-  searchButtonHandler();
-})};
+citySearchHistoryBtnEl.addEventListener ("click", function(event) {
+  citySearchInputEl.value = $(this).html();
+  console.log(citySearchInputEl.value);
+  searchButtonHandler(event);
+})
+};
 
 renderHistory();
 

@@ -12,6 +12,7 @@ let currentTempEl = document.querySelector('#currentTemp');
 let currentHumidityEl = document.querySelector('#currentHumidity');
 let currentWindSpeedEl = document.querySelector('#currentWindSpeed');
 let currentUVIndexEl = document.querySelector('#currentUV');
+let currentUVIndex;
 let weatherTodayIcon;
 let weatherTodaySource;
 let weatherTodayDescription;
@@ -99,23 +100,45 @@ function getWeatherData (citySearchInput) {
         response.json().then(function (data) {
           console.log(data);
           console.log();
+
+          // Current City and Date
           todayCardHeader.textContent = (citySearchInputEl.value.trim() + ' (' + date + ')');
+
           // Current Weather Icon
           weatherTodayIcon = data.current.weather[0].icon;
           weatherTodaySource = ('http://openweathermap.org/img/wn/' + weatherTodayIcon + '@2x.png')
           weatherTodayDescription = data.current.weather[0].description;
           todayIconEl.src = weatherTodaySource;
           todayIconEl.alt = weatherTodayDescription;
+
           // Current Temperature
           tempK = data.current.temp;
           tempF = kToF(tempK) + " &#176F";
           currentTempEl.innerHTML = tempF;
+
           // Current Humidity
           currentHumidityEl.innerHTML = (data.current.humidity + "%");
+
           // Current Wind Speed
           currentWindSpeedEl.innerHTML = (data.current.wind_speed + " MPH");
+
           // Current UV Index
-          currentUVIndexEl.innerHTML = (data.current.uvi);
+          currentUVIndex = (data.current.uvi);
+          currentUVIndexEl.innerHTML = currentUVIndex;
+          console.log(currentUVIndex);
+          if (currentUVIndex < 2.99) {
+            currentUVIndexEl.classList.add('custom-favorable');
+            currentUVIndexEl.classList.remove('custom-moderate');
+            currentUVIndexEl.classList.remove('custom-severe');
+          } else if (currentUVIndex > 3 && currentUVIndex < 5.99) {
+            currentUVIndexEl.classList.add('custom-moderate');
+            currentUVIndexEl.classList.remove('custom-favorable');
+            currentUVIndexEl.classList.remove('custom-severe');
+          } else {
+            currentUVIndexEl.classList.add('custom-severe');
+            currentUVIndexEl.classList.remove('custom-favorable');
+            currentUVIndexEl.classList.remove('custom-moderate');
+          };
 
         });
       } else {

@@ -12,6 +12,8 @@
   --c-yellow: #ffb703;
   --c-lneutral: #fffaf2;
   --c-white: #ffffff;
+  --c-green: #007932;
+  --c-red: #f00314;
 }
 
 body {
@@ -52,6 +54,24 @@ body {
 .custom-card-body {
   background-image: linear-gradient(var(--c-blue), var(--c-lblue));
   line-height: 1.5rem !important; /*TO DO: Get this to work*/
+}
+
+.custom-favorable {
+  background-color: var(--c-green);
+  border-radius: .1em;
+  padding: 0px .35px !important; /*TO DO: Get this to work*/
+}
+
+.custom-moderate {
+  background-color: var(--c-orange);
+  border-radius: .1em;
+  padding: 0px .35px !important; /*TO DO: Get this to work*/
+}
+
+.custom-severe {
+  background-color: var(--c-red);
+  border-radius: .1em;
+  padding: 0px .35px !important; /*TO DO: Get this to work*/
 }
 
 .custom-footer {

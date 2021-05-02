@@ -1,9 +1,9 @@
-//TO DO: Get Array to display in button field 
-
 // Variables
 let citySearchInputEl = document.querySelector('#city-search-input');
 let citySearchInput;
 let citySearchHistory = [];
+let citySearchHistoryBtnEl;
+let citySearchHistoryBtnContainerEl = document.querySelector('#btnList')
 let apiKey = 'a46fae6c97cce84840e8dfd333cdaca5';
 let latLonApiUrl;
 let tempK;
@@ -21,7 +21,7 @@ let weatherTodayIcon;
 let weatherTodayIconSource;
 let weatherTodayDescription;
 
-// TO DO: Use loop to assign numbers. This process is currently redundant.
+// TO DO: Use loop to assign numbers. This process (and the associated rendering) is currently redundant.
 // Day 1
 let day1CardHeaderEl = document.querySelector('#day1CardHeader');
 let day1IconEl = document.querySelector('#day1Icon');
@@ -100,19 +100,22 @@ function renderHistory() {
   let searchHistoryParse = JSON.parse(retrievedHistory);
   console.log(searchHistoryParse);
 
-  for (i = 0; i < searchHistoryParse.length; i++) {
-    $('#city-0').text(searchHistoryParse[0]);
-    $('#city-1').text(searchHistoryParse[1]);
-    $('#city-2').text(searchHistoryParse[2]);
-    $('#city-3').text(searchHistoryParse[3]);
-    $('#city-4').text(searchHistoryParse[4]);
-    $('#city-5').text(searchHistoryParse[5]);
-    $('#city-6').text(searchHistoryParse[6]);
-    $('#city-7').text(searchHistoryParse[7]);
-    $('#city-8').text(searchHistoryParse[8]);
-    $('#city-9').text(searchHistoryParse[9]);
-  }
-};
+  // for (i = 0; i < searchHistoryParse.length; i++) {
+  citySearchHistoryBtnEl = document.createElement("button");
+  citySearchHistoryBtnEl.innerHTML = searchHistoryParse[0];
+  citySearchHistoryBtnEl.setAttribute('type', 'submit');
+  citySearchHistoryBtnEl.setAttribute('class', 'btn btn-secondary btn-block custom-btn');
+  citySearchHistoryBtnEl.setAttribute('display', 'block');
+
+// Append
+  citySearchHistoryBtnContainerEl.appendChild(citySearchHistoryBtnEl);
+
+// Add Event Handler
+  citySearchHistoryBtnEl.addEventListener ("click", function() {
+  console.log('HistoryButtonClicked');
+  citySearchInput = $(this).innerHtml;
+  searchButtonHandler();
+})};
 
 renderHistory();
 

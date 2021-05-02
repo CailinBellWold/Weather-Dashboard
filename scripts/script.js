@@ -204,7 +204,7 @@ function getWeatherData (citySearchInput) {
           day2CardHeaderEl.textContent = (date + 2); //Doesn't Work
           // Day 2 Icon
           day2Icon = data.daily[1].weather[0].icon;
-          day2IconSource = ('http://openweathermap.org/img/wn/' + day2Icon + '@2x.png')
+          day2IconSource = ('https://openweathermap.org/img/wn/' + day2Icon + '@2x.png')
           day2IconDescription = data.daily[1].weather[0].description;
           day2IconEl.src =  day2IconSource;
           day2IconEl.alt = day2IconDescription;

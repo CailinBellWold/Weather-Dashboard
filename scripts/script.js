@@ -41,6 +41,7 @@ function renderHistory() {
     console.log(searchHistoryParse[1]); //Works
 
     $('#city-0').innerText = "Testing";
+    $('#city-0').value = "Testing";
     $('#city-1').innerText = searchHistoryParse[1];
     $('#city-2').innerText = (searchHistoryParse[2]);
     $('#city-3').innerText = (searchHistoryParse[3]);
@@ -66,7 +67,7 @@ function renderHistory() {
 
 //TO DO: Update with State/Country once I get this working.
   function getLatLon (citySearchInput) {
-    var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey;
+    var latLonApiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey;
     // var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + "," + state + "," + country + '&limit={limit}&appid=' + apiKey;
     fetch(latLonApiUrl).then(function (response) {
       if (response.ok) {

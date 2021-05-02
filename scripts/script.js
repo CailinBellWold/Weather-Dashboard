@@ -6,7 +6,18 @@ let citySearchInput;
 let citySearchHistory = [];
 let apiKey = 'a46fae6c97cce84840e8dfd333cdaca5';
 let latLonApiUrl;
-let todayCardHeader = document.querySelector('#todayCardHeader');
+let todayCardHeaderEl = document.querySelector('#todayCardHeader');
+let todayIconEl = document.querySelector('#todayIcon');
+let currentTempEl = document.querySelector('#currentTemp');
+let currentHumidityEl = document.querySelector('#currentHumidity');
+let currentWindSpeedEl = document.querySelector('#currentWindSpeed');
+let currentUVIndexEl = document.querySelector('#currentUV');
+let weatherTodayIcon;
+let weatherTodaySource;
+let weatherTodayDescription;
+let tempK;
+let tempF;
+
 
 // Button
 let searchButton = document.getElementById('search-button');
@@ -38,10 +49,10 @@ function createSearchHistory(citySearchInput) {
 function renderHistory() {
   let retrievedHistory = localStorage.getItem('searchHistory');
   let searchHistoryParse = JSON.parse(retrievedHistory);
-  console.log(searchHistoryParse); //WORKS
+  console.log(searchHistoryParse);
 
   for (i = 0; i < searchHistoryParse.length; i++) {
-    $('#city-0').text(searchHistoryParse[0]); //Works
+    $('#city-0').text(searchHistoryParse[0]);
     $('#city-1').text(searchHistoryParse[1]);
     $('#city-2').text(searchHistoryParse[2]);
     $('#city-3').text(searchHistoryParse[3]);
@@ -82,22 +93,39 @@ renderHistory();
 
 function getWeatherData (citySearchInput) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&appid=' + apiKey;
-  
+  console.log(citySearchInput);
     fetch(apiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
           console.log(data);
-          for (var i = 0; i < data.length; i++) {
-            let icon = data[i].current.weather[0].icon;
-            console.log(icon);
-          }      
-          todayCardHeader.innerHTML = (citySearchInput + '(' + date + ')');
-          // displayWeather(data.XXXXX, citySearchInput);
+          console.log();
+          todayCardHeader.textContent = (citySearchInputEl.value.trim() + ' (' + date + ')');
+          // Current Weather Icon
+          weatherTodayIcon = data.current.weather[0].icon;
+          weatherTodaySource = ('http://openweathermap.org/img/wn/' + weatherTodayIcon + '@2x.png')
+          weatherTodayDescription = data.current.weather[0].description;
+          todayIconEl.src = weatherTodaySource;
+          todayIconEl.alt = weatherTodayDescription;
+          // Current Temperature
+          tempK = data.current.temp;
+          tempF = kToF(tempK) + " &#176F";
+          currentTempEl.innerHTML = tempF;
+          // Current Humidity
+          currentHumidityEl.innerHTML = (data.current.humidity + "%");
+          // Current Wind Speed
+          currentWindSpeedEl.innerHTML = (data.current.wind_speed + " MPH");
+          // Current UV Index
+          currentUVIndexEl.innerHTML = (data.current.uvi);
+
         });
       } else {
         alert('Error: ' + response.statusText);
       }
     });
   };
+
+  function kToF(tempK) {
+    return Math.floor((tempK - 273.15) *1.8 +32);
+}
 
 //GOAL: 1.) Take user input, trim, convert case (if necessary). 2.) Store Input to local storage 3.) Convert city to lat/lon 4.) Run function to retrieve weather. 5.) Input responses into correct spans.  

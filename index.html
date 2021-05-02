@@ -56,13 +56,14 @@
             <!--Current Day's Forecast-->
             <div class="col-12 col-md-10">
                 <div class="card">
-                    <h3 id="todayCardHeader" class="card-header custom-card-header">City, Date, Icon</h3>
+                    <h3 id="todayCardHeader" class="card-header custom-card-header text-white">City, Date</h3> 
                     <div class="card-body custom-card-body">
+                        <img id="todayIcon">
                         <ul class="card-text list-unstyled h5">
-                            <li>Temp:<span></span></li>
-                            <li>Wind:<span></span></li>
-                            <li>Humidity:<span></span></li>
-                            <li>UV Index:<span></span></li>
+                            <li>Temp: <span id="currentTemp" class="text-white"></span></li>
+                            <li>Humidity: <span id="currentHumidity" class="text-white"></span></li>
+                            <li>Wind Speed: <span id="currentWindSpeed" class="text-white"></span></li>
+                            <li>UV Index: <span id="currentUV" class="text-white"></span></li>
                         </ul>
                     </div>
                 </div>

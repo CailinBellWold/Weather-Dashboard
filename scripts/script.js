@@ -75,6 +75,7 @@ let searchButton = document.getElementById('search-button');
 let today = new Date();
 let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
 
+// Handler for Search Button
 let searchButtonHandler = function (event) {
   event.preventDefault();
   citySearchInput = citySearchInputEl.value.trim(); //TO DO: How to adjust for space/no space, comma, no comma, etc. Start with City, for now...
@@ -88,6 +89,7 @@ let searchButtonHandler = function (event) {
 
 searchButton.addEventListener('click', searchButtonHandler);
 
+// Creates Search History and Sets to Local Storage
 function createSearchHistory(citySearchInput) {
   citySearchHistory.unshift(citySearchInput);
   localStorage.setItem('searchHistory', JSON.stringify(citySearchHistory));
@@ -95,25 +97,26 @@ function createSearchHistory(citySearchInput) {
   renderHistory();
 };
 
+// Renders Search History to Buttons
 function renderHistory() {
   let retrievedHistory = localStorage.getItem('searchHistory');
   let searchHistoryParse = JSON.parse(retrievedHistory);
-  console.log(searchHistoryParse);
+  // console.log(searchHistoryParse);
 
-  // for (i = 0; i < searchHistoryParse.length; i++) {
+  // Creates Button
   citySearchHistoryBtnEl = document.createElement("button");
   citySearchHistoryBtnEl.innerHTML = searchHistoryParse[0];
   citySearchHistoryBtnEl.setAttribute('type', 'submit');
   citySearchHistoryBtnEl.setAttribute('class', 'btn btn-secondary btn-block custom-btn');
   citySearchHistoryBtnEl.setAttribute('display', 'block');
 
-// Append
+// Appends Button to Page
   citySearchHistoryBtnContainerEl.appendChild(citySearchHistoryBtnEl);
 
-// Add Event Handler
+// Adds Event Handler to Button
   citySearchHistoryBtnEl.addEventListener ("click", function() {
-  console.log('HistoryButtonClicked');
-  citySearchInput = $(this).innerHtml;
+  citySearchInput = $(this).innerHTML;
+  console.log(citySearchInput); //Not Working
   searchButtonHandler();
 })};
 
@@ -123,19 +126,20 @@ renderHistory();
 
   function getLatLon (citySearchInput) {
     // console.log("getLatLon triggered");
-    // var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + "," + state + "," + country + '&limit={limit}&appid=' + apiKey;
-    var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey;
+    // var latLonApiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearchInput + '&limit=1&appid=' + apiKey; //This is returning in GitHub, as it isn't https
+    var latLonApiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + citySearchInput + '&appid=' + apiKey;
 
     fetch(latLonApiUrl).then(function (response) {
       // console.log(response);
       if (response.ok) {
         response.json().then(function (data) {
-          for (var i = 0; i < data.length; i++) {
-            lat = data[i].lat;
-            // console.log(lat);
-            lon = data[i].lon;
-            // console.log(lon);
-          }
+          console.log(data);
+          // for (var i = 0; i < data.length; i++) {
+            lat = data.coord.lat;
+            console.log(lat);
+            lon = data.coord.lon;
+            console.log(lon);
+          // }
         }) .then(getWeatherData);
       } else {
         alert('Error: ' + response.statusText);
@@ -145,12 +149,9 @@ renderHistory();
 
 function getWeatherData (citySearchInput) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=minutely,hourly,alerts&appid=' + apiKey;
-  console.log(citySearchInput);
     fetch(apiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
-          console.log();
 
           // Current City and Date
           todayCardHeader.textContent = (citySearchInputEl.value.trim() + ' (' + date + ')');
@@ -176,7 +177,6 @@ function getWeatherData (citySearchInput) {
           // Current UV Index
           currentUVIndex = (data.current.uvi);
           currentUVIndexEl.innerHTML = currentUVIndex;
-          console.log(currentUVIndex);
           if (currentUVIndex < 2.99) {
             currentUVIndexEl.classList.add('custom-favorable');
             currentUVIndexEl.classList.remove('custom-moderate');
@@ -191,6 +191,7 @@ function getWeatherData (citySearchInput) {
             currentUVIndexEl.classList.remove('custom-moderate');
           };
 
+          // TO DO: Figure out how to loop this section AND get dates to display correctly
           // Day 1
           day1CardHeaderEl.textContent = (date + 1); //Doesn't Work
           // Day 1 Icon
@@ -275,13 +276,12 @@ function getWeatherData (citySearchInput) {
           day5WindEl.innerHTML = (data.daily[4].wind_speed + " MPH");
           // Day 5 Humidity
           day5HumidityEl.innerHTML = (data.daily[4].humidity + "%");
-
         });
       } else {
         alert('Error: ' + response.statusText);
       }
     });
-  };
+};
 
   function kToF(tempK) {
     return Math.floor((tempK - 273.15) *1.8 +32);

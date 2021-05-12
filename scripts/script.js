@@ -114,7 +114,6 @@ function renderHistory() {
 // Adds Event Handler to Button
 citySearchHistoryBtnEl.addEventListener ("click", function(event) {
   citySearchInputEl.value = $(this).html();
-  console.log(citySearchInputEl.value);
   searchButtonHandler(event);
 })
 };
